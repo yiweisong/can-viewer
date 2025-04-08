@@ -27,6 +27,11 @@ def load_dbc(dbc_path):
 def setup_can_interface(interface, channel, bitrate):
     """设置 CAN 接口"""
     try:
+        if interface == 'bmcan':
+            return can.interface.Bus(bustype=interface, channel=0, bitrate=bitrate, data_bitrate=2000000, tres=True, is_fd=False)
+        elif type == 'pcan':
+            return can.interface.Bus(bustype=interface, bitrate=bitrate, data_bitrate=2000000, tres=True, is_fd=False)
+
         return can.interface.Bus(bustype=interface, channel=channel, bitrate=bitrate)
     except Exception as e:
         print(f"Failed to setup CAN interface: {e}")
