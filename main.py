@@ -66,6 +66,7 @@ def main():
             # 读取 CAN 消息
             message = bus.recv(timeout=1)
             if message is None:
+                print('received none')
                 continue
 
             # 解析 CAN 消息
@@ -76,6 +77,8 @@ def main():
                     "timestamp": f"{message.timestamp:.3f}",
                     "data": decoded_message
                 })
+            else:
+                print('cannot parse message')
 
             # 显示解析结果
             table = Table(title="CAN Messages")
